@@ -1,0 +1,40 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  position: relative;
+}
+
+.logo {
+  font-weight: bold;
+  padding: 1rem 1.5rem;
+  border: 2px solid #dcdcdc;
+  border-radius: 10px;
+  color: #ccc;
+  transform: rotate(-2deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.search-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: transparent;
+  outline: none;
+}
+
