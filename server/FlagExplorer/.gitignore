@@ -1,0 +1,64 @@
+## Build artifacts
+bin/
+obj/
+out/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code
+.vscode/
+
+## Rider
+.idea/
+
+## OS generated
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Configuration
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+## Dotnet Tools
+.dotnet-tools.json
+
+## Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragejson
+
+## NuGet
+*.nupkg
+packages/
+.nuget/
+
+## Build and publish folders
+publish/
+*.dbmdl
+*.bak
+*.sql
+*.pdb
+
+## Entity Framework
+Migrations/
+
+## Global.json SDKs
+global.json
+
+## Secrets
+secrets.json
+
+## Visual Studio
+*.vs/
