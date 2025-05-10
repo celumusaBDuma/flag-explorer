@@ -1,6 +1,17 @@
 <main class="country-list">
-  <ng-container *ngFor="let country of countries">
-    <app-country-item [country]="country"></app-country-item>
-  </ng-container>
+    <ng-container *ngFor="let country of paginatedCountries">
+        <app-country-item [country]="country"></app-country-item>
+    </ng-container>
 
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+
+        <button *ngFor="let page of totalPages"
+                [disabled]="page === currentPage"
+                (click)="goToPage(page)">
+            {{ page }}
+        </button>
+
+        <button (click)="nextPage()" [disabled]="currentPage * pageSize >= countries.length">Next</button>
+    </div>
 </main>
