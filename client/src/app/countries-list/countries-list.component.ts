@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CountryItemComponent } from './country-item/country-item.component';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { Country, CountryService } from '../services/country.service';
 
 @Component({
   selector: 'app-countries-list',
@@ -10,15 +10,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './countries-list.component.css',
 })
 export class CountriesListComponent {
-  countries: any = [];
+  countries: Country[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private countryService: CountryService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any>('assets/data/countries_data.json')
-      .subscribe((response) => {
-        this.countries = response;
-      });
+    this.countryService.getAllCountries().subscribe(data => {
+      this.countries = data;
+    });
   }
 }
