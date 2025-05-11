@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Install backend dependencies
+        working-directory: ./server
+        run: npm install
+
+  run-tests:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run frontend tests (Cypress or unit tests)
+        working-directory: ./client
+        run: npm run test:ci
+
+      - name: Run backend tests
+        working-directory: ./server
+        run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: run-tests
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build frontend
+        working-directory: ./client
+        run: npm run build
+
+      - name: Build backend
+        working-directory: ./server
+        run: npm run build
+
+  package:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Archive frontend build
+        working-directory: ./client
+        run: |
+          mkdir -p ../../build-artifacts/frontend
+          cp -r dist/* ../../build-artifacts/frontend/
+
+      - name: Archive backend build
+        working-directory: ./server
+        run: |
+          mkdir -p ../../build-artifacts/backend
+          cp -r dist/* ../../build-artifacts/backend/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: build-artifacts
