@@ -1,0 +1,13 @@
+
+<main class="country-details">
+
+  <app-spinner *ngIf="isLoading"></app-spinner>
+
+  <div *ngIf="!isLoading && countryDetails" class="country-details">
+    <img [src]="countryDetails?.flag" alt="Flag of {{ countryDetails?.name }}" />
+    <h2>{{ countryDetails?.name }}</h2>
+    <p><strong>Capital:</strong> {{ countryDetails?.capital }}</p>
+    <p><strong>Population:</strong> {{ countryDetails?.population | number }}</p>
+  </div>
+  <button (click)="goBack()" class="back-button">← Back to Countries</button>
+</main>

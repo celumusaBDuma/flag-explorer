@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CountryItemComponent } from './country-item/country-item.component';
 import { CommonModule } from '@angular/common';
 import { Country, CountryService } from '../services/country.service';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-countries-list',
-  imports: [CountryItemComponent, CommonModule],
+  imports: [CountryItemComponent, CommonModule, SpinnerComponent],
   templateUrl: './countries-list.component.html',
   styleUrl: './countries-list.component.css',
 })
@@ -14,6 +15,7 @@ export class CountriesListComponent {
   paginatedCountries: Country[] = [];
   currentPage  = 1;
   pageSize = 12;
+  isLoading = true;
 
   constructor(private countryService: CountryService) {}
 
@@ -21,6 +23,7 @@ export class CountriesListComponent {
     this.countryService.getAllCountries().subscribe(data => {
       this.countries = data;
       this.updatePagination();
+      this.isLoading = false;
     });
   }
 

@@ -1,4 +1,5 @@
 <main class="country-list">
+    <app-spinner *ngIf="isLoading"></app-spinner>
     <ng-container *ngFor="let country of paginatedCountries">
         <app-country-item [country]="country"></app-country-item>
     </ng-container>

@@ -1,4 +1,4 @@
   <div class="country-item">
     <img [src]="country.flag" alt="Flag of {{ country.name}}"  class="flag" />
-    <a href="#" class="country-link">{{ country.name}}</a>
+    <a [routerLink]="['/country', country.name]" class="country-link"> {{ country.name}}</a>
   </div>

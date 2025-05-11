@@ -2,6 +2,31 @@
   background-color: #cdcdcd;
   padding: 2rem;
   /* max-width: 90%; */
-  height: 80vh;
   margin: 0 auto;
 }
+
+.flag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.flag-card {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
