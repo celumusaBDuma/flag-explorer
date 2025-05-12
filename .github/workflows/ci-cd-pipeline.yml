@@ -19,7 +19,11 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: ./client
-        run: npm install
+        run: npm ci
+
+      - name: Install Cypress binary
+        working-directory: ./client
+        run: npx cypress install
 
       - name: Install backend dependencies
         working-directory: ./server
@@ -31,13 +35,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run frontend tests (Cypress or unit tests)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run frontend unit tests
         working-directory: ./client
-        run: npm run e2e
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Run Cypress E2E tests
+        working-directory: ./client
+        run: npx cypress run
 
       - name: Run backend tests
         working-directory: ./server
-        run: dotnet tes
+        run: dotnet test
 
   build:
     runs-on: ubuntu-latest
@@ -69,7 +82,7 @@ jobs:
         working-directory: ./server
         run: |
           mkdir -p ../../build-artifacts/backend
-          cp -r dist/* ../../build-artifacts/backend/
+          cp -r bin/Release/* ../../build-artifacts/backend/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
