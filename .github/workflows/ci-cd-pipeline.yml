@@ -23,7 +23,7 @@ jobs:
 
       - name: Install backend dependencies
         working-directory: ./server
-        run: npm install
+        run: dotnet restore
 
   run-tests:
     runs-on: ubuntu-latest
